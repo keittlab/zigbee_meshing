@@ -14,7 +14,7 @@ from ipaddress import IPv4Address
 from queue import Queue, Empty
 from digi.xbee.serial import FlowControl, XBeeSerialPort
 
-device = XBeeDevice("COM1", 9600)  # NOTE: Change "COM1" to the according serial port
+device = XBeeDevice("COM3", 9600)  # NOTE: Change "COM1" to the according serial port
 # that the XBee is plugged into. COM1 is placed here as a placeholder assuming the
 # XBee device is plugged into "USB-A Port 1".
 

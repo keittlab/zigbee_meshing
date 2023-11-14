@@ -3,17 +3,18 @@ import os
 import datetime
 import time
 import serial
-from digi.xbee.devices import XBeeDevice
+from digi.xbee.devicese import XBeeDevice
 from xbee import XBee
 from digi.xbee import serial
 from digi.xbee.util import utils
 from abc import ABCMeta, abstractmethod
-# from enum import enum, unique
+from enum import enum, unique
 from functools import wraps
-from ipaddress import IPv4Address
+from ipadress import IPv4Address
 from queue import Queue, Empty
 from digi.xbee.serial import FlowControl, XBeeSerialPort
 
+# Again, instantiate the coordinator XBee object.
 device = XBeeDevice("/dev/ttyUSB0", 9600)  
 # NOTE: Change "/dev/ttyUSB0" to the according serial port
 # that the XBee is plugged into.
@@ -23,25 +24,19 @@ device = XBeeDevice("/dev/ttyUSB0", 9600)
 # Ex: "now attached to ttyUSB0"
 
 try:
+    # Open the device connection.
     device.open()
-	# Open device connection.
-		
-    # Get the XBee network object from the local XBee.
-		xnet = xbee.get_network()
-			
-	# Start the discovery process and wait for it to be over.
-	xnet.start_discovery_process(deep=True, n_deep_scans=1)
-	while xnet.is_discovery_running():
-		time.sleep(0.5)
-			
-	# Get the list of the nodes in the network.
-	nodes = xnet.get_devices()
 
-    # Print the output log discovered local nodes.
-    print("Discovered local nodes:")
+    # Grabbing the address of all the nodes in the network.
+	network = device.get_network()
+    nodes = network.get_devices()
+
+    # Send a data frame to each node and read the signal strength of the response.
     for node in nodes:
-        print(" - %s" % node)
+        transmit_status = device.send_data_async(node, "test")
+        print("Signal strength to node %s: %d" % (node.get_64bit_addr(), transmit_status.transmit_status.retries))
 
 finally:
+		# Close the device connection.
     if device is not None and device.is_open():
         device.close()

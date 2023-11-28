@@ -27,7 +27,7 @@ try:
 	# Open device connection.
 		
     # Get the XBee network object from the local XBee.
-		xnet = xbee.get_network()
+	xnet = xbee.get_network()
 			
 	# Start the discovery process and wait for it to be over.
 	xnet.start_discovery_process(deep=True, n_deep_scans=1)

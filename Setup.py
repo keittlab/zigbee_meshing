@@ -24,18 +24,18 @@ device = XBeeDevice("/dev/ttyUSB0", 9600)
 
 try:
     device.open()
-	# Open device connection.
-		
+    # Open device connection.
+        
     # Get the XBee network object from the local XBee.
-	xnet = xbee.get_network()
-			
-	# Start the discovery process and wait for it to be over.
-	xnet.start_discovery_process(deep=True, n_deep_scans=1)
-	while xnet.is_discovery_running():
-		time.sleep(0.5)
-			
-	# Get the list of the nodes in the network.
-	nodes = xnet.get_devices()
+    xnet = xbee.get_network()
+            
+    # Start the discovery process and wait for it to be over.
+    xnet.start_discovery_process(deep=True, n_deep_scans=1)
+    while xnet.is_discovery_running():
+        time.sleep(0.5)
+            
+    # Get the list of the nodes in the network.
+    nodes = xnet.get_devices()
 
     # Print the output log discovered local nodes.
     print("Discovered local nodes:")

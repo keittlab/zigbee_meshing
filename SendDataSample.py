@@ -12,7 +12,6 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-from digi.xbee.devices import XBeeDevice
 import numpy as np
 import os
 import datetime
@@ -22,7 +21,10 @@ from digi.xbee.devices import XBeeDevice
 from xbee import XBee
 from digi.xbee import serial
 from digi.xbee.util import utils
+from abc import ABCMeta, abstractmethod
+# from enum import enum, unique
 from functools import wraps
+from ipaddress import IPv4Address
 from queue import Queue, Empty
 from digi.xbee.serial import FlowControl, XBeeSerialPort
 
@@ -44,6 +46,22 @@ def main():
 
     try:
         device.open()
+
+        # Get the XBee network object from the local XBee.
+        xnet = device.get_network()
+                
+        # Start the discovery process and wait for it to be over.
+        xnet.start_discovery_process(deep=True, n_deep_scans=1)
+        while xnet.is_discovery_running():
+            time.sleep(0.5)
+                
+        # Get the list of the nodes in the network.
+        nodes = xnet.get_devices()
+    
+        # Print the output log discovered local nodes.
+        print("Discovered local nodes:")
+        for node in nodes:
+            print(" - %s" % node)
 
         # Obtain the remote XBee device from the XBee network.
         xbee_network = device.get_network()

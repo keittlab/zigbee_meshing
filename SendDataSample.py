@@ -23,7 +23,6 @@ from xbee import XBee
 from digi.xbee import serial
 from digi.xbee.util import utils
 from functools import wraps
-from ipadress import IPv4Address
 from queue import Queue, Empty
 from digi.xbee.serial import FlowControl, XBeeSerialPort
 

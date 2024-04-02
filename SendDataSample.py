@@ -63,9 +63,7 @@ def main():
         for node in nodes:
             print(" - %s" % node)
 
-        # Obtain the remote XBee device from the XBee network.
-        xbee_network = device.get_network()
-        remote_device = xbee_network.discover_device(REMOTE_NODE_ID)
+        remote_device = xnet.discover_device(REMOTE_NODE_ID)
         if remote_device is None:
             print("Could not find the remote device")
             exit(1)

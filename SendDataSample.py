@@ -32,7 +32,7 @@ PORT = "/dev/ttyUSB0"
 BAUD_RATE = 9600
 
 DATA_TO_SEND = "Hello XBee!"
-REMOTE_NODE_ID = "COORDINATOR"
+REMOTE_NODE_ID = "END_DEVICE"
 
 
 def main():

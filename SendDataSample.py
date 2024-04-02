@@ -25,9 +25,8 @@ def main():
         remote_device = None
 
         for node in nodes:
-            if node.get_node_id() == REMOTE_NODE_ID:
-                remote_device = node
-                break
+            remote_device = node
+            break
 
         if remote_device is None:
             print("Could not find the remote device")

@@ -18,12 +18,10 @@ import os
 import datetime
 import time
 import serial
-from digi.xbee.devicese import XBeeDevice
+from digi.xbee.devices import XBeeDevice
 from xbee import XBee
 from digi.xbee import serial
 from digi.xbee.util import utils
-from abc import ABCMeta, abstractmethod
-from enum import enum, unique
 from functools import wraps
 from ipadress import IPv4Address
 from queue import Queue, Empty

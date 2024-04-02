@@ -32,7 +32,7 @@ PORT = "/dev/ttyUSB0"
 BAUD_RATE = 9600
 
 DATA_TO_SEND = "Hello XBee!"
-REMOTE_NODE_ID = "REMOTE"
+REMOTE_NODE_ID = "COORDINATOR"
 
 
 def main():
@@ -47,8 +47,7 @@ def main():
 
         # Obtain the remote XBee device from the XBee network.
         xbee_network = device.get_network()
-        remote_node_ids = get_devices()
-        remote_device = xbee_network.discover_device(remote_node_ids)
+        remote_device = xbee_network.discover_device(REMOTE_NODE_ID)
         if remote_device is None:
             print("Could not find the remote device")
             exit(1)

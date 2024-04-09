@@ -39,7 +39,7 @@ def main():
         def data_receive_callback(xbee_message):
             print("From %s >> %s" % (xbee_message.remote_device.get_64bit_addr(),
                                      xbee_message.data.decode()))
-            write_file(RECEIVED_FILE, received_data)
+            write_file(RECEIVED_FILE, xbee_message.data.decode())
 
         device.add_data_received_callback(data_receive_callback)
 

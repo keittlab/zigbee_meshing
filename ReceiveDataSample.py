@@ -19,6 +19,12 @@ PORT = "/dev/ttyUSB0"
 # TODO: Replace with the baud rate of your local module.
 BAUD_RATE = 9600
 
+FILE_TO_SEND = "/home/redtail/dev/zigbee_meshing/files"
+RECEIVED_FILE = "received_file.txt"
+
+def write_file(file_path, data):
+    with open(file_path, 'w') as file:
+        file.write(data)
 
 def main():
     print(" +-----------------------------------------+")
@@ -33,6 +39,7 @@ def main():
         def data_receive_callback(xbee_message):
             print("From %s >> %s" % (xbee_message.remote_device.get_64bit_addr(),
                                      xbee_message.data.decode()))
+            write_file(RECEIVED_FILE, received_data)
 
         device.add_data_received_callback(data_receive_callback)
 

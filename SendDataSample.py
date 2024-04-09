@@ -35,8 +35,12 @@ BAUD_RATE = 9600
 
 DATA_TO_SEND = "Hello XBee!"
 REMOTE_NODE_ID = "END_DEVICE"
+FILE_TO_SEND = "/home/mesh3/dev/zigbee_meshing/files/send.txt"
 
-
+def read_file(file_path):
+    with open(file_path, 'r') as file:
+        return file.read()
+        
 def main():
     print(" +--------------------------------------+")
     print(" | XBee Python Library Send Data Sample |")
@@ -46,6 +50,10 @@ def main():
 
     try:
         device.open()
+
+        content = read_file(FILE_TO_SEND)
+
+        DATA_TO_SEND = content
 
         # Get the XBee network object from the local XBee.
         xnet = device.get_network()

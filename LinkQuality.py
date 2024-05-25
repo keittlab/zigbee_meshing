@@ -1,5 +1,5 @@
 from digi import xbee
-from digi.xbee.devices import XBeeDevice
+from digi.xbee.devices import DigiMeshDevice
 from digi.xbee.models.status import NetworkDiscoveryStatus
 from digi.xbee.models.mode import NeighborDiscoveryMode
 import time
